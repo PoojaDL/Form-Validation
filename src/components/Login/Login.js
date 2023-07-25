@@ -3,6 +3,7 @@ import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
 import AuthContext from "../../state/auth-context";
+import { InputFun } from "../UI/Input/InputFun";
 
 const emailReducer = (state, action) => {
   if (action.type === "USER_INPUT") {
@@ -100,48 +101,33 @@ const Login = () => {
   return (
     <Card className={classes.login}>
       <form onSubmit={submitHandler}>
-        <div
-          className={`${classes.control} ${
-            emailState.isValid === false ? classes.invalid : ""
-          }`}
-        >
-          <label htmlFor="email">E-Mail</label>
-          <input
-            type="email"
-            id="email"
-            value={emailState.value}
-            onChange={emailChangeHandler}
-            onBlur={validateEmailHandler}
-          />
-        </div>
-        <div
-          className={`${classes.control} ${
-            passState.isValid === false ? classes.invalid : ""
-          }`}
-        >
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            value={passState.value}
-            onChange={passwordChangeHandler}
-            onBlur={validatePasswordHandler}
-          />
-        </div>
-        <div
-          className={`${classes.control} ${
-            clgState.isValid === false ? classes.invalid : ""
-          }`}
-        >
-          <label htmlFor="college">College Name</label>
-          <input
-            type="text"
-            id="college"
-            value={clgState.value}
-            onChange={collegeChangeHandler}
-            onBlur={validateCollegeHandler}
-          />
-        </div>
+        <InputFun
+          id="email"
+          name="Email"
+          type="email"
+          state={emailState}
+          onChange={emailChangeHandler}
+          onBlur={validateEmailHandler}
+        />
+
+        <InputFun
+          id="password"
+          name="PassWord"
+          type="password"
+          state={passState}
+          onChange={passwordChangeHandler}
+          onBlur={validatePasswordHandler}
+        />
+
+        <InputFun
+          id="college"
+          name="College Name"
+          type="text"
+          state={clgState}
+          onChange={collegeChangeHandler}
+          onBlur={validateCollegeHandler}
+        />
+
         <div className={classes.actions}>
           <Button type="submit" className={classes.btn} disabled={!formIsValid}>
             Login
